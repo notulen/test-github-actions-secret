@@ -1,0 +1,22 @@
+name: "Run"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+jobs:
+  tweet:
+    name: "Run"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - run: python main.py
+        env:
+          SECRET_1: ${{ secrets.SECRET_1 }}
+          SECRET_2: ${{ secrets.SECRET_2 }}
